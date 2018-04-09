@@ -6,7 +6,7 @@
 /*   By: lpoujade <lpoujade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 11:33:22 by lpoujade          #+#    #+#             */
-/*   Updated: 2016/10/19 11:38:00 by lpoujade         ###   ########.fr       */
+/*   Updated: 2018/04/09 14:24:56 by lpoujade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,23 @@ int				logf_log(char *fname, char *msg)
 	return (0);
 }
 
+int				print_chunk(char *msg_format, int i, unsigned int next, \
+		t_logf *l)
+{
+	char	*tmp;
+
+	tmp = ft_strsub(msg_format + i, 0, next);
+	ft_putstr_fd(tmp, l->fd);
+	ft_strdel(&tmp);
+	return (0);
+}
+
 int				logf_log_format(char *fname, char *msg_format, ...)
 {
 	unsigned int	next;
 	int				i;
 	t_logf			*l;
 	va_list			ap;
-	char			*tmp;
 
 	i = 0;
 	va_start(ap, msg_format);
@@ -71,11 +81,7 @@ int				logf_log_format(char *fname, char *msg_format, ...)
 			break ;
 		}
 		if (next > 0)
-		{
-			tmp = ft_strsub(msg_format + i, 0, next);
-			ft_putstr_fd(tmp, l->fd);
-			ft_strdel(&tmp);
-		}
+			print_chunk(msg_format, i, next, l);
 		s_print_format(msg_format + i + next + 1, ap, l->fd);
 		i += next + 2;
 	}

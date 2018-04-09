@@ -6,7 +6,7 @@
 /*   By: lpoujade <lpoujade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 16:14:46 by lpoujade          #+#    #+#             */
-/*   Updated: 2016/11/27 16:14:46 by lpoujade         ###   ########.fr       */
+/*   Updated: 2018/04/09 14:15:11 by lpoujade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ static inline size_t	count_w(char const *s, char *c)
 	return (co);
 }
 
+static int				adjust(int i, int len, char *c, const char *s)
+{
+	while (s[i + len] && !ft_strchr(c, s[i + len]))
+		len++;
+	return (len);
+}
+
 char					**ft_strsplit(const char *s, char *c)
 {
 	size_t	count;
@@ -53,19 +60,15 @@ char					**ft_strsplit(const char *s, char *c)
 	if (!(ret = ft_memalloc(sizeof(char *) * (count + 1))))
 		return (NULL);
 	while (s[i] && n_w < count)
-	{
 		if (ft_strchr(c, s[i]))
 			i++;
 		else
 		{
-			while (s[i + len] && !ft_strchr(c, s[i + len]))
-				len++;
+			len = adjust(i, len, c, s);
 			if (len >= 1)
 				ret[n_w++] = ft_strsub(s, (unsigned int)i, len);
 			i += len;
 			len = 0;
 		}
-	}
-	ret[n_w] = NULL;
 	return (ret);
 }

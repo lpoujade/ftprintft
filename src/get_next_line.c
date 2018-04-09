@@ -6,7 +6,7 @@
 /*   By: lpoujade <lpoujade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/19 11:39:55 by lpoujade          #+#    #+#             */
-/*   Updated: 2018/04/09 10:37:54 by lpoujade         ###   ########.fr       */
+/*   Updated: 2018/04/09 14:26:40 by lpoujade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,8 @@ int				get_next_line(int const fd, char **line)
 	}
 	s_fd = 1;
 	while (s_fd > 0 && f->buff && !ft_strchr(f->buff, '\n'))
-		ret = (((s_fd = buf_read_add(f)) < 0) ? -1 : ret);
+		if ((s_fd = buf_read_add(f)) < 0)
+			ret = -1;
 	if ((s_fd || *f->buff) && (*line = ft_strnew(ft_strclchr(f->buff, '\n'))))
 		ret = (ft_strncpy(*line, f->buff, ft_strclchr(f->buff, '\n')) ? 1 : -1);
 	else if (s_fd || *f->buff)

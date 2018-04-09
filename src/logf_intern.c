@@ -6,13 +6,13 @@
 /*   By: lpoujade <lpoujade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 09:02:26 by lpoujade          #+#    #+#             */
-/*   Updated: 2018/04/09 11:17:09 by lpoujade         ###   ########.fr       */
+/*   Updated: 2018/04/09 14:24:27 by lpoujade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "logf.h"
 
-t_logf	*create_logf(char *fname)
+t_logf			*create_logf(char *fname)
 {
 	t_logf	*new;
 
@@ -35,7 +35,19 @@ t_logf	*create_logf(char *fname)
 	return (new);
 }
 
-t_logf	*use_logf(char *fname)
+static t_logf	*s_set(char *fname, t_logf *t, t_logf *list_logf)
+{
+	if (!(t = create_logf(fname)))
+		return (NULL);
+	t->next = list_logf->next;
+	t->prev = (t_list*)list_logf;
+	if (t->next)
+		t->next->prev = (t_list*)t;
+	list_logf->next = (t_list*)t;
+	return (t);
+}
+
+t_logf			*use_logf(char *fname)
 {
 	static t_logf	*list_logf = NULL;
 	t_logf			*t;
@@ -51,16 +63,7 @@ t_logf	*use_logf(char *fname)
 		while (ft_strcmp(list_logf->fname, fname))
 		{
 			if (t == list_logf)
-			{
-				if (!(t = create_logf(fname)))
-					return (NULL);
-				t->next = list_logf->next;
-				t->prev = (t_list*)list_logf;
-				if (t->next)
-					t->next->prev = (t_list*)t;
-				list_logf->next = (t_list*)t;
-				return (t);
-			}
+				return (s_set(fname, t, list_logf));
 			if (!t)
 				t = list_logf;
 			list_logf = (t_logf*)list_logf->next;
@@ -68,7 +71,7 @@ t_logf	*use_logf(char *fname)
 	return (list_logf);
 }
 
-void	s_print_format(char *f, va_list ap, int fd)
+void			s_print_format(char *f, va_list ap, int fd)
 {
 	char	*s;
 	int		d;

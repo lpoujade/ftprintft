@@ -6,7 +6,7 @@
 /*   By: lpoujade <lpoujade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 18:40:55 by lpoujade          #+#    #+#             */
-/*   Updated: 2016/12/16 13:16:23 by lpoujade         ###   ########.fr       */
+/*   Updated: 2018/04/09 14:54:24 by lpoujade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ static int	putit(unsigned long long t, t_mod o)
 	field_len = 0;
 	w = 0;
 	len = (t ? gndigits_hex((signed long long)t) : 1);
+	len += ((o.flags & F_ALTMODE && (t || o.name == 'p')) ? 2 : 0);
 	if (t)
 		field_len = (o.precision != -1 && (unsigned int)o.precision > len) ?
 			o.precision : (int)len;
@@ -84,7 +85,7 @@ static int	putit(unsigned long long t, t_mod o)
 		w += ft_putchar('0');
 		len++;
 	}
-	if (o.precision == -1 || (t != 0 && o.precision))
+	if (t || o.precision)
 		ft_puthex(t, (o.flags & F_HEXMAJ ? 0 : 1), &w);
 	o.pad_char = ' ';
 	return ((w += pad_post(o, len)));

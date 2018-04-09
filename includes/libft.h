@@ -6,7 +6,7 @@
 /*   By: lpoujade <lpoujade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 21:45:54 by lpoujade          #+#    #+#             */
-/*   Updated: 2018/04/09 11:21:28 by lpoujade         ###   ########.fr       */
+/*   Updated: 2018/04/09 12:50:33 by lpoujade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ typedef	struct		s_file
 	int				buff_size;
 }					t_file;
 
-int					ft_printf(const char *format, ...)
-	__attribute__((format (printf, 1, 2)));
+int					ft_printf(const char *format, ...);
 void				ft_pmem(const void *addr, size_t t);
 int					get_next_line(int const fd, char **line);
 int					ft_readfile(char *fname, char **buf, size_t buflen,

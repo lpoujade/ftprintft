@@ -6,22 +6,11 @@
 /*   By: lpoujade <lpoujade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/27 16:24:06 by lpoujade          #+#    #+#             */
-/*   Updated: 2016/12/16 13:08:22 by lpoujade         ###   ########.fr       */
+/*   Updated: 2018/04/09 12:52:12 by lpoujade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-/*
-  ** apply binary mask (0xFE ? 0b11… 10… ?) to REVERSED c
-  ** then split to char
-  ** //# define M1		0xc080
-  **
-  ** # define MASK_1 0b 1100 0000 1000 0000
-  ** # define MASK_2 0b111000001000000010000000
-  ** # define MASK_3 0b11110000100000001000000010000000
-  **# define MASK_4 0b1111100010000000100000001000000010000000
-*/
 
 static ssize_t	pwchar_else(wchar_t c, int fd)
 {
