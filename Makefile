@@ -6,7 +6,7 @@
 #    By: lpoujade <lpoujade@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/11 13:41:06 by lpoujade          #+#    #+#              #
-#    Updated: 2018/04/09 14:37:39 by lpoujade         ###   ########.fr        #
+#    Updated: 2018/04/10 10:12:18 by lpoujade         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME=libftprintf.a
 src_path=./src
 obj_path=./.obj
 
-CC=clang
+CC=gcc
 CFLAGS=-Wall -Werror -Wextra -g #-Wno-discarded-qualifiers -Wno-unused -Wno-incompatible-pointer-types
 CPPFLAGS=-Iincludes/
 ARFLAGS=scr
